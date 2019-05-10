@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+
+
+    table {
+        margin: 3% auto;
+        width: 500px;
+    }
+
+
+</style>
+<body>
+
+
+<table>
+    <caption><h2>百万条数据导入excel的代码</h2></caption>
+
+    <thead>
+
+    <tr>
+        <th>字段</th>
+        <th>数值</th>
+        <th>备注</th>
+
+    </tr>
+
+
+    </thead>
+
+    <tfoot>
+
+    <tr>
+        <td>文件位置</td>
+        <td>D:\file\excel\</td>
+        <td>excel文件位置</td>
+    </tr>
+
+    <tr>
+        <td>数据条数</td>
+        <td>100万</td>
+        <td>提前需要向数据库插入100万条数据</td>
+    </tr>
+    <tr>
+        <td>文件操作</td>
+        <td><input type="button" value="开始导出数据" id="export"></td>
+        <td>java代码调用excel接口导出数据</td>
+    </tr>
+    </tfoot>
+</table>
+
+
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#export").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/export",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(getJsonData()),
+                dataType: "json",
+                success: function (message) {
+                    console.log(message);
+                    $("#span").html(message.result);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log(XMLHttpRequest);
+                    console.log(textStatus);
+                    console.log(errorThrown)
+                }
+            });
+        })
+    });
+
+    function getJsonData() {
+        return {};
+    }
+
+</script>
+
+
+</body>
+</html>
